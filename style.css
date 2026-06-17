@@ -1,3 +1,6 @@
+/* ==========================================================================
+   Struttura Base e Reset
+   ========================================================================== */
 body {
     margin: 0;
     background: radial-gradient(circle at top, #0c0f17, #030406 80%);
@@ -96,45 +99,43 @@ body {
 }
 
 /* ==========================================================================
-   Particelle / Stelle (FIXATE: Ora visibili e fluttuanti)
-   ========================================================================== */
-/* ==========================================================================
-   Particelle / Stelle (FIX definitivo per JS e Visibilità)
+   Particelle / Stelle (Sincronizzate con il doppio timer JS)
    ========================================================================== */
 .star {
     position: fixed;
-    width: 3px;         /* Portate a 3px per renderle più visibili */
-    height: 3px;
-    background: #ffffff;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9999;      /* Valore altissimo per bucare qualsiasi sfondo o container */
+    z-index: 9999; /* In primo piano assoluto */
     
-    /* Manteniamo il nome 'twinkle' perché il tuo JavaScript lo cerca inline */
-    animation: twinkle 6s linear infinite; 
+    /* Colleghiamo i due nomi di animazione che controlleremo via JS */
+    animation-name: floatUp, twinkle;
+    animation-iteration-count: infinite, infinite;
+    animation-timing-function: linear, ease-in-out;
 }
 
-@keyframes twinkle {
+/* Animazione 1: Movimento continuo verso l'alto e destra */
+@keyframes floatUp {
     0% { 
         transform: translateY(0px) translateX(0px); 
-        opacity: 0.1; /* Nascono delicate */
-    }
-    50% { 
-        opacity: 0.8; /* Brillano a metà percorso */
     }
     100% { 
-        /* Fluttuano verso l'alto e verso destra prima di svanire */
-        transform: translateY(-120px) translateX(30px); 
-        opacity: 0.0; /* Svaniscono completamente alla fine */
+        transform: translateY(-150px) translateX(35px); 
     }
 }
+
+/* Animazione 2: Dissolvenza e pulsazione luminosa isolata */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.95; }
+}
+
 /* ==========================================================================
    Layout, Contenuti e Ordinamento Emblema
    ========================================================================== */
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column; /* Allinea l'emblema verticalmente SOPRA al titolo */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -144,7 +145,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Configurazione ed Animazione dell'Emblema della Casata */
 .hero-emblem {
     max-width: clamp(220px, 25vw, 310px);
     width: 100%;
@@ -156,12 +156,12 @@ body {
 
 @keyframes floatEmblem {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); } /* Fluttuazione morbida verticale */
+    50% { transform: translateY(-12px); }
 }
 
 .hero h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem); /* Evita che il testo si tagli sui lati */
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     margin: 0;
     color: #f0e6d2;
     text-shadow: 0 0 30px rgba(139, 111, 201, 0.6);
@@ -209,7 +209,6 @@ body {
     line-height: 1.7;
 }
 
-/* Profezia */
 .prophecy {
     border-left: 3px solid #8b6fc9;
     padding-left: 25px;
@@ -220,7 +219,6 @@ body {
     line-height: 1.6;
 }
 
-/* Griglia dei Personaggi */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -265,52 +263,36 @@ body {
 }
 
 /* ==========================================================================
-   Colori Personalizzati Personaggi (Aggiornati)
+   Colori Personalizzati Personaggi
    ========================================================================== */
-/* Thamorin */
 .crimson h3 { color: #ff4d6d; }
 .crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
 
-/* Lythira: Grigio Chiaro Minerale */
 .grey h3, .bluviola h3 { color: #b0b7bd; }
 .grey:hover, .bluviola:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
 
-/* Le Gemelle: Bianco Puro */
 .white h3, .silver h3 { color: #ffffff; }
 .white:hover, .silver:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); border-color: #ffffff; }
 
-/* Vaerys */
 .green h3 { color: #4dff9a; }
 .green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
 
-/* Cyndra */
 .purple h3 { color: #b07cff; }
 .purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
 
-/* Coralyth */
 .dark h3 { color: #777; }
 .dark:hover { box-shadow: 0 0 25px rgba(50, 50, 50, 0.6); border-color: #444; }
 
-/* Kaelen */
 .earth h3 { color: #d4a373; }
 .earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
 
-/* Liste di essenze e utilità text */
-.essence-list {
-    list-style-type: none;
-    padding-left: 0;
-}
-.essence-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-}
-.essence-list strong {
-    color: #bfaee3;
-}
+.essence-list { list-style-type: none; padding-left: 0; }
+.essence-list li { padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+.essence-list strong { color: #bfaee3; }
 .center-text { text-align: center; margin-top: 30px; }
 
 /* ==========================================================================
-   Footer / Finale
+   Footer / Finale e Scroll Reveal
    ========================================================================== */
 .ending {
     max-width: 850px;
@@ -321,34 +303,11 @@ body {
     z-index: 2;
 }
 
-.ending h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    color: #f0e6d2;
-}
+.ending h2 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #f0e6d2; }
+.epic-text { font-family: 'Cinzel', serif; letter-spacing: 4px; font-size: 1.3rem; color: #8b6fc9; margin-bottom: 40px; }
+.final-paragraph { font-style: italic; opacity: 0.85; }
+.final-quote { font-family: 'Cinzel', serif; font-size: 1.4rem; margin-top: 40px; color: #f0e6d2; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
 
-.epic-text {
-    font-family: 'Cinzel', serif;
-    letter-spacing: 4px;
-    font-size: 1.3rem;
-    color: #8b6fc9;
-    margin-bottom: 40px;
-}
-
-.final-paragraph {
-    font-style: italic;
-    opacity: 0.85;
-}
-
-.final-quote {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    margin-top: 40px;
-    color: #f0e6d2;
-    text-shadow: 0 0 10px rgba(255,255,255,0.1);
-}
-
-/* Animazione di Visualizzazione (Reveal Scroll) */
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -361,9 +320,9 @@ body {
 }
 
 /* ==========================================================================
-   Nuovo: CSS Bottone "Ascolta l'Audio"
+   Stile unificato Pulsante Audio (Supporta classi e ID)
    ========================================================================== */
-.audio-control {
+.audio-control, #audioToggle {
     position: fixed;
     bottom: 25px;
     right: 25px;
@@ -373,7 +332,7 @@ body {
     padding: 12px 22px;
     border-radius: 4px;
     cursor: pointer;
-    z-index: 100; /* Rimane fisso sopra a tutti gli elementi della pagina */
+    z-index: 10000;
     font-family: 'Cinzel', serif;
     font-size: 0.85rem;
     letter-spacing: 1.5px;
@@ -383,10 +342,16 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.audio-control:hover {
+.audio-control:hover, #audioToggle:hover {
     background: rgba(139, 111, 201, 0.15);
     border-color: #8b6fc9;
     box-shadow: 0 0 25px rgba(139, 111, 201, 0.45);
-    transform: translateY(-3px); /* Leggero sollevamento al passaggio del mouse */
+    transform: translateY(-3px);
     color: #ffffff;
+}
+
+/* Stato attivo quando la musica è in riproduzione */
+.audio-control.playing, #audioToggle.playing {
+    border-color: #4dff9a;
+    box-shadow: 0 0 20px rgba(77, 255, 154, 0.3);
 }
