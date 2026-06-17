@@ -1,62 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // 1. Scroll Reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const show = () => {
-        reveals.forEach(r => {
-            const top = r.getBoundingClientRect().top;
-            if (top < window.innerHeight - 80) {
-                r.classList.add('active');
-            }
-        });
-    };
-    window.addEventListener('scroll', show);
-    show();
+// Gestione dell'animazione a comparsa (Scroll Reveal)
+const reveals = document.querySelectorAll('.reveal');
 
-    // 2. Generatore Stelle
-    const particles = document.getElementById('particles');
-    if (particles) {
-        const starCount = 150;
-        const starColors = ['#ffffff', '#e0e7ff', '#f3e8ff', '#c3dafe'];
-
-        for (let i = 0; i < starCount; i++) {
-            const s = document.createElement('div');
-            s.className = 'star';
-            
-            // Posizionamento casuale
-            s.style.left = Math.random() * 100 + 'vw';
-            s.style.top = Math.random() * 100 + 'vh';
-            
-            // Proprietà casuali
-            const size = Math.random() * 2 + 1;
-            const duration = 20 + Math.random() * 30;
-            
-            s.style.width = size + 'px';
-            s.style.height = size + 'px';
-            s.style.backgroundColor = starColors[Math.floor(Math.random() * starColors.length)];
-            s.style.animationDuration = duration + 's';
-            s.style.animationDelay = Math.random() * duration + 's';
-            
-            particles.appendChild(s);
-        }
-    }
-
-    // 3. Audio Control
-    const audioToggle = document.getElementById('audioToggle');
-    const bgMusic = document.getElementById('bg-music');
-    const audioText = audioToggle.querySelector('.audio-text');
-
-    audioToggle.addEventListener('click', () => {
-        if (bgMusic.paused) {
-            bgMusic.play().then(() => {
-                audioText.innerText = 'Silenzia Melodia';
-            }).catch(e => console.log("Audio bloccato dal browser"));
-        } else {
-            bgMusic.pause();
-            audioText.innerText = 'Ascolta Melodia';
+function show() {
+    reveals.forEach(r => {
+        const top = r.getBoundingClientRect().top;
+        if (top < window.innerHeight - 80) {
+            r.classList.add('active');
         }
     });
-});        const twinkleDuration = 2 + Math.random() * 4;  // Da 2s a 6s
+}
+
+window.addEventListener('scroll', show);
+show();
+
+// Generatore di Stelle in Movimento Permanente (Cielo Stellato)
+const particles = document.getElementById('particles');
+
+if (particles) {
+    const starCount = 140; // Numero di stelle contemporanee a schermo
+    const starColors = [
+        'rgba(255, 255, 255, 0.9)', 
+        'rgba(224, 231, 255, 0.9)', 
+        'rgba(243, 232, 255, 0.95)', 
+        'rgba(195, 218, 254, 0.8)'
+    ];
+
+    for (let i = 0; i < starCount; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        
+        // Distribuzione casuale sull'asse X
+        s.style.left = Math.random() * 100 + 'vw';
+        
+        // Durate differenziate per creare profondità (stelle vicine e lontane)
+        const moveDuration = 20 + Math.random() * 40; // Da 20s a 60s
+        const twinkleDuration = 2 + Math.random() * 4;  // Da 2s a 6s
         s.style.animationDuration = `${moveDuration}s, ${twinkleDuration}s`;
         
         // Il trucco magico: delay negativi randomizzati distribuiscono le stelle 
