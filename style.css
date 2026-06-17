@@ -101,31 +101,36 @@ body {
 /* ==========================================================================
    Particelle / Stelle (FIXATE: Ora visibili e fluttuanti)
    ========================================================================== */
+/* ==========================================================================
+   Particelle / Stelle (FIX definitivo per JS e Visibilità)
+   ========================================================================== */
 .star {
     position: fixed;
-    width: 2px;
-    height: 2px;
-    background: white;
+    width: 3px;         /* Portate a 3px per renderle più visibili */
+    height: 3px;
+    background: #ffffff;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 10; /* FIX: Portate sopra all'header così non vengono nascoste */
-    animation: floatStars 6s linear infinite; /* FIX: Aggiunta durata base obbligatoria per il CSS */
+    z-index: 9999;      /* Valore altissimo per bucare qualsiasi sfondo o container */
+    
+    /* Manteniamo il nome 'twinkle' perché il tuo JavaScript lo cerca inline */
+    animation: twinkle 6s linear infinite; 
 }
 
-@keyframes floatStars {
+@keyframes twinkle {
     0% { 
         transform: translateY(0px) translateX(0px); 
-        opacity: 0.1; /* Visibile ma soffusa alla nascita */
+        opacity: 0.1; /* Nascono delicate */
     }
     50% { 
-        opacity: 0.6; /* Splendore magico a metà percorso */
+        opacity: 0.8; /* Brillano a metà percorso */
     }
     100% { 
-        transform: translateY(-100px) translateX(25px); /* Fluttua verso l'alto e destra */
-        opacity: 0.1;
+        /* Fluttuano verso l'alto e verso destra prima di svanire */
+        transform: translateY(-120px) translateX(30px); 
+        opacity: 0.0; /* Svaniscono completamente alla fine */
     }
 }
-
 /* ==========================================================================
    Layout, Contenuti e Ordinamento Emblema
    ========================================================================== */
