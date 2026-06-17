@@ -1,6 +1,3 @@
-/* ==========================================================================
-   Struttura Base e Reset
-   ========================================================================== */
 body {
     margin: 0;
     background: radial-gradient(circle at top, #0c0f17, #030406 80%);
@@ -11,31 +8,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Contenitore Stelle - Corretto */
-#particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.star {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0;
-    animation: twinkle linear infinite;
-}
-
-@keyframes twinkle {
-    0% { opacity: 0; transform: translateY(0px); }
-    50% { opacity: 0.8; }
-    100% { opacity: 0; transform: translateY(-100px); }
-}
-
-/* Sfondi Ambientali */
+/* Sfondi Ambientali Fisso e Nebbia */
 .fog {
     position: fixed;
     inset: 0;
@@ -51,24 +24,131 @@ body {
     100% { transform: scale(1.1) translate(-50px, 20px); }
 }
 
-/* Layout Content (z-index elevato per stare sopra le stelle) */
-.hero, .story-container, .ending {
-    position: relative;
-    z-index: 2;
+/* Struttura e Animazione dell'Albero di Vaelor */
+.tree-container {
+    position: fixed;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 900px;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    display: flex;
+    align-items: flex-end;
+    animation: treeSway 12s ease-in-out infinite alternate;
 }
 
+.vaelor-tree {
+    width: 100%;
+    height: auto;
+}
+
+.tree-trunk, .tree-branch {
+    fill: none;
+    stroke: #1a233a;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.tree-branch {
+    stroke-width: 3;
+    opacity: 0.7;
+}
+
+/* Radici che si Illuminano (Effetto Neon/Glow) */
+.glowing-root {
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    animation: rootPulse 6s ease-in-out infinite alternate;
+}
+
+.root-1 { stroke: #8b6fc9; stroke-width: 4.5; animation-delay: 0s; }
+.root-2 { stroke: #a370f7; stroke-width: 3.5; animation-delay: 1.5s; }
+.root-3 { stroke: #513b82; stroke-width: 5; animation-delay: 3s; }
+.root-4 { stroke: #8b6fc9; stroke-width: 4; animation-delay: 0.7s; }
+.root-5 { stroke: #4d3380; stroke-width: 3; animation-delay: 2.2s; }
+
+@keyframes rootPulse {
+    0% {
+        stroke-width: inherit;
+        filter: drop-shadow(0 0 2px rgba(139, 111, 201, 0.3));
+        opacity: 0.4;
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(163, 112, 247, 0.9));
+        opacity: 1;
+    }
+    100% {
+        stroke-width: calc(inherit + 1px);
+        filter: drop-shadow(0 0 6px rgba(139, 111, 201, 0.5));
+        opacity: 0.6;
+    }
+}
+
+@keyframes treeSway {
+    0% { transform: translateX(-50%) rotate(-1deg); }
+    100% { transform: translateX(-50%) rotate(1deg); }
+}
+
+/* ==========================================================================
+   Particelle / Stelle (FIXATE: Ora visibili e fluttuanti)
+   ========================================================================== */
+/* ==========================================================================
+   Particelle / Stelle (FIX definitivo per JS e Visibilità)
+   ========================================================================== */
+.star {
+    position: fixed;
+    width: 3px;         /* Portate a 3px per renderle più visibili */
+    height: 3px;
+    background: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;      /* Valore altissimo per bucare qualsiasi sfondo o container */
+    
+    /* Manteniamo il nome 'twinkle' perché il tuo JavaScript lo cerca inline */
+    animation: twinkle 6s linear infinite; 
+}
+
+@keyframes twinkle {
+    0% { 
+        transform: translateY(0px) translateX(0px); 
+        opacity: 0.1; /* Nascono delicate */
+    }
+    50% { 
+        opacity: 0.8; /* Brillano a metà percorso */
+    }
+    100% { 
+        /* Fluttuano verso l'alto e verso destra prima di svanire */
+        transform: translateY(-120px) translateX(30px); 
+        opacity: 0.0; /* Svaniscono completamente alla fine */
+    }
+}
+/* ==========================================================================
+   Layout, Contenuti e Ordinamento Emblema
+   ========================================================================== */
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Allinea l'emblema verticalmente SOPRA al titolo */
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 2;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
+/* Configurazione ed Animazione dell'Emblema della Casata */
 .hero-emblem {
     max-width: clamp(220px, 25vw, 310px);
+    width: 100%;
+    height: auto;
     margin-bottom: 25px;
     filter: drop-shadow(0 0 25px rgba(139, 111, 201, 0.35));
     animation: floatEmblem 6s ease-in-out infinite;
@@ -76,15 +156,17 @@ body {
 
 @keyframes floatEmblem {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-12px); } /* Fluttuazione morbida verticale */
 }
 
 .hero h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem, 5vw, 3.5rem); /* Evita che il testo si tagli sui lati */
     margin: 0;
     color: #f0e6d2;
     text-shadow: 0 0 30px rgba(139, 111, 201, 0.6);
+    letter-spacing: 2px;
+    line-height: 1.3;
 }
 
 .subtitle {
@@ -95,19 +177,216 @@ body {
     letter-spacing: 3px;
 }
 
-/* Sezioni, Card e Audio (Invariati) */
-.story-container { max-width: 850px; margin: auto; padding: 0 20px; }
-.chapter { margin-bottom: 100px; text-align: justify; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
-.card { padding: 25px; background: rgba(10, 15, 25, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; backdrop-filter: blur(4px); transition: 0.4s; }
-.card:hover { transform: translateY(-8px); }
-
-.audio-control {
-    position: fixed; bottom: 25px; right: 25px; background: rgba(10, 15, 25, 0.85);
-    border: 1px solid rgba(139, 111, 201, 0.4); color: #e8e2d6; padding: 12px 22px;
-    border-radius: 4px; cursor: pointer; z-index: 100; font-family: 'Cinzel', serif;
-    backdrop-filter: blur(6px); transition: 0.3s;
+/* ==========================================================================
+   Sezione Storia / Testi
+   ========================================================================== */
+.story-container {
+    max-width: 850px;
+    margin: auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
 }
 
-.reveal { opacity: 0; transform: translateY(40px); transition: 1.2s ease; }
-.reveal.active { opacity: 1; transform: translateY(0); }
+.chapter {
+    margin-bottom: 100px;
+    text-align: justify;
+}
+
+.chapter h2 {
+    font-family: 'Cinzel', serif;
+    color: #cfd6e6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin-top: 60px;
+    letter-spacing: 1px;
+}
+
+.lead {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #f0e6d2;
+    line-height: 1.7;
+}
+
+/* Profezia */
+.prophecy {
+    border-left: 3px solid #8b6fc9;
+    padding-left: 25px;
+    margin: 40px 0;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #bfaee3;
+    line-height: 1.6;
+}
+
+/* Griglia dei Personaggi */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    padding: 25px;
+    background: rgba(10, 15, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+}
+
+.card h3 {
+    font-family: 'Cinzel', serif;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+}
+
+.title-tag {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* ==========================================================================
+   Colori Personalizzati Personaggi (Aggiornati)
+   ========================================================================== */
+/* Thamorin */
+.crimson h3 { color: #ff4d6d; }
+.crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
+
+/* Lythira: Grigio Chiaro Minerale */
+.grey h3, .bluviola h3 { color: #b0b7bd; }
+.grey:hover, .bluviola:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
+
+/* Le Gemelle: Bianco Puro */
+.white h3, .silver h3 { color: #ffffff; }
+.white:hover, .silver:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); border-color: #ffffff; }
+
+/* Vaerys */
+.green h3 { color: #4dff9a; }
+.green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
+
+/* Cyndra */
+.purple h3 { color: #b07cff; }
+.purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
+
+/* Coralyth */
+.dark h3 { color: #777; }
+.dark:hover { box-shadow: 0 0 25px rgba(50, 50, 50, 0.6); border-color: #444; }
+
+/* Kaelen */
+.earth h3 { color: #d4a373; }
+.earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
+
+/* Liste di essenze e utilità text */
+.essence-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+.essence-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.essence-list strong {
+    color: #bfaee3;
+}
+.center-text { text-align: center; margin-top: 30px; }
+
+/* ==========================================================================
+   Footer / Finale
+   ========================================================================== */
+.ending {
+    max-width: 850px;
+    margin: 150px auto 100px auto;
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.ending h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: #f0e6d2;
+}
+
+.epic-text {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 4px;
+    font-size: 1.3rem;
+    color: #8b6fc9;
+    margin-bottom: 40px;
+}
+
+.final-paragraph {
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.final-quote {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    color: #f0e6d2;
+    text-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* Animazione di Visualizzazione (Reveal Scroll) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   Nuovo: CSS Bottone "Ascolta l'Audio"
+   ========================================================================== */
+.audio-control {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(10, 15, 25, 0.85);
+    border: 1px solid rgba(139, 111, 201, 0.4);
+    color: #e8e2d6;
+    padding: 12px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 100; /* Rimane fisso sopra a tutti gli elementi della pagina */
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 15px rgba(139, 111, 201, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.audio-control:hover {
+    background: rgba(139, 111, 201, 0.15);
+    border-color: #8b6fc9;
+    box-shadow: 0 0 25px rgba(139, 111, 201, 0.45);
+    transform: translateY(-3px); /* Leggero sollevamento al passaggio del mouse */
+    color: #ffffff;
+}
