@@ -1,3 +1,8 @@
+Ecco il codice aggiornato. Per fare le cose fatte bene ed evitare che il codice sia slegato dai nomi, ho rinominato le classi direttamente in .grey (per il grigio mistico di Lythira) e .white (per il bianco candido delle Gemelle).
+
+Prima sostituisci interamente il tuo file style.css con questo blocco aggiornato:
+
+CSS
 /* Struttura Base e Reset */
 body {
     margin: 0;
@@ -55,45 +60,59 @@ body {
 
 @keyframes twinkle {
     0% { 
-        opacity: 0.05; /* Le stelle al minimo sono quasi invisibili */
+        opacity: 0.05;
     }
     100% { 
-        opacity: 0.45; /* <--- ABBASSATO DA 1 A 0.45: ora sono molto più trasparenti e delicate */
+        opacity: 0.45;
         filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)); 
     }
 }
 
 /* Layout e Contenuti (Hero & Main) */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;   /* <--- QUESTO FORZA L'ALLINEAMENTO VERTICALE */
-    justify-content: center;  /* Centra tutto verticalmente nello schermo */
-    align-items: center;      /* Centra tutto orizzontalmente */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     position: relative;
     z-index: 2;
-    padding: 0 20px;          /* Protegge i testi sui telefoni piccoli */
+    padding: 40px 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero h1 {
     font-family: 'Cinzel', serif;
-    font-size: 3.5rem;
-    margin: 20px 0 0 0;       /* Aggiunge spazio solo SOPRA il titolo (staccandolo dal logo) */
+    font-size: clamp(2rem, 4.5vw, 3.5rem); 
+    margin: 25px 0 0 0;
     color: #f0e6d2;
     text-shadow: 0 0 35px rgba(138, 43, 226, 0.5);
     letter-spacing: 2px;
-    line-height: 1.3;
+    line-height: 1.2;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
     font-family: 'Cinzel', serif;
     color: #a39c8e;
-    margin-top: 15px;         /* Spazio tra il titolo e il sottotitolo */
+    margin-top: 20px;
     letter-spacing: 3px;
-    max-width: 600px;         /* Impedisce al sottotitolo di allargarsi troppo */
+    max-width: 600px;
+    line-height: 1.5;
 }
+
 .story-container {
     max-width: 850px;
     margin: auto;
@@ -182,11 +201,13 @@ body {
 .crimson h3 { color: #ff4d6d; }
 .crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
 
-.bluviola h3 { color: #9d4edd; }
-.bluviola:hover { box-shadow: 0 0 25px rgba(138, 43, 226, 0.5); border-color: #8a2be2; }
+/* Lythira: Grigio Acciaio/Nebbia */
+.grey h3 { color: #b0b7bd; }
+.grey:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
 
-.silver h3 { color: #e0e0e0; }
-.silver:hover { box-shadow: 0 0 25px rgba(192, 192, 192, 0.3); border-color: silver; }
+/* Le Gemelle: Bianco Splendente */
+.white h3 { color: #ffffff; }
+.white:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); border-color: #ffffff; }
 
 .green h3 { color: #4dff9a; }
 .green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
@@ -261,17 +282,17 @@ body {
     opacity: 1;
     transform: translateY(0);
 }
+
 /* Stile per l'Emblema della Casata */
 .hero-emblem {
-    max-width: 280px; /* Dimensione bilanciata per desktop e mobile */
+    max-width: 280px;
     width: 100%;
     height: auto;
     margin-bottom: -10px;
-    filter: drop-shadow(0 0 20px rgba(139, 111, 201, 0.4)); /* Glow viola sfumato */
-    animation: floatEmblem 6s ease-in-out infinite; /* Fluttuazione continua */
+    filter: drop-shadow(0 0 20px rgba(139, 111, 201, 0.4));
+    animation: floatEmblem 6s ease-in-out infinite;
 }
 
-/* Animazione di fluttuazione mistica */
 @keyframes floatEmblem {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-12px); }
@@ -305,7 +326,6 @@ body {
     background: rgba(15, 22, 33, 0.95);
 }
 
-/* Quando la musica è attiva il pulsante si illumina delicatamente di verde energetico */
 .audio-control.playing {
     border-color: #4dff9a;
     box-shadow: 0 0 15px rgba(77, 255, 154, 0.2);
