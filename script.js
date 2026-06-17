@@ -52,3 +52,22 @@ if (particles) {
         particles.appendChild(s);
     }
 }
+// Gestione del riproduttore audio fantasy
+const audioToggle = document.getElementById('audioToggle');
+const bgMusic = document.getElementById('bg-music');
+const audioText = audioToggle.querySelector('.audio-text');
+
+audioToggle.addEventListener('click', () => {
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+            audioToggle.classList.add('playing');
+            audioText.innerText = 'Silenzia Melodia';
+        }).catch(err => {
+            console.log("Riproduzione bloccata dalle restrizioni del browser: ", err);
+        });
+    } else {
+        bgMusic.pause();
+        audioToggle.classList.remove('playing');
+        audioText.innerText = 'Ascolta Melodia';
+    }
+});
