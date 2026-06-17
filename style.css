@@ -1,281 +1,85 @@
-Ecco il codice aggiornato. Per fare le cose fatte bene ed evitare che il codice sia slegato dai nomi, ho rinominato le classi direttamente in .grey (per il grigio mistico di Lythira) e .white (per il bianco candido delle Gemelle).
-
-Prima sostituisci interamente il tuo file style.css con questo blocco aggiornato:
-
-CSS
-/* Struttura Base e Reset */
+/* ==========================================================================
+   IL TUO STILE ORIGINALE (Ripristinato dal file ZIP)
+   ========================================================================== */
 body {
     margin: 0;
-    background: radial-gradient(circle at top, #080b11, #020305 85%);
+    background: radial-gradient(circle at top, #0b0f14, #050608 70%);
     color: #e8e2d6;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    line-height: 1.8;
     overflow-x: hidden;
 }
 
-/* Sfondi Ambientali Fisso e Nebbia cosmica */
-.fog {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 20% 30%, rgba(106, 13, 173, 0.05), transparent 60%),
-                radial-gradient(circle at 80% 70%, rgba(139, 111, 201, 0.03), transparent 50%);
-    animation: fogMovement 35s linear infinite alternate;
-    pointer-events: none;
-    z-index: 1;
-}
-
-@keyframes fogMovement {
-    0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.1) translate(-30px, 30px); }
-}
-
-/* Cielo Stellato in Movimento (Particelle animate) */
-#particles {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.star {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    animation: moveStar linear infinite, twinkle ease-in-out infinite alternate;
-}
-
-/* Movimento continuo e fluido verso l'alto e leggermente di lato */
-@keyframes moveStar {
-    0% {
-        transform: translateY(105vh) translateX(0);
-    }
-    100% {
-        transform: translateY(-5vh) translateX(45px);
-    }
-}
-
-@keyframes twinkle {
-    0% { 
-        opacity: 0.05;
-    }
-    100% { 
-        opacity: 0.45;
-        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)); 
-    }
-}
-
-/* Layout e Contenuti (Hero & Main) */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
-    z-index: 2;
-    padding: 40px 20px;
-    box-sizing: border-box;
-    overflow: hidden;
 }
 
-.hero-content {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hero h1 {
+h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2rem, 4.5vw, 3.5rem); 
-    margin: 25px 0 0 0;
-    color: #f0e6d2;
-    text-shadow: 0 0 35px rgba(138, 43, 226, 0.5);
-    letter-spacing: 2px;
-    line-height: 1.2;
-    width: 100%;
-    word-wrap: break-word;
+    font-size: 4rem;
+    text-shadow: 0 0 20px #8b6fc9;
 }
 
-.subtitle {
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    font-family: 'Cinzel', serif;
-    color: #a39c8e;
-    margin-top: 20px;
-    letter-spacing: 3px;
-    max-width: 600px;
-    line-height: 1.5;
-}
-
-.story-container {
-    max-width: 850px;
-    margin: auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 2;
-}
+.subtitle { opacity: .8; }
 
 .chapter {
-    margin-bottom: 100px;
-    text-align: justify;
+    max-width: 900px;
+    margin: auto;
+    padding: 120px 20px;
 }
 
-.chapter h2 {
-    font-family: 'Cinzel', serif;
+h2 {
+    font-family: 'Cinzel';
     color: #cfd6e6;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 10px;
-    margin-top: 60px;
-    letter-spacing: 1px;
 }
 
-.lead {
-    font-size: 1.5rem;
-    font-style: italic;
-    color: #f0e6d2;
-    line-height: 1.7;
-}
-
-/* Profezia */
-.prophecy {
-    border-left: 3px solid #8a2be2;
-    padding-left: 25px;
-    margin: 40px 0;
+blockquote {
+    border-left: 3px solid #8b6fc9;
+    padding-left: 20px;
     font-size: 1.4rem;
-    font-style: italic;
-    color: #bfaee3;
-    line-height: 1.6;
 }
 
-/* Griglia dei Personaggi */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
 }
 
 .card {
-    padding: 25px;
-    background: rgba(8, 12, 20, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 4px;
-    backdrop-filter: blur(5px);
-    transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: .4s;
 }
 
-.card h3 {
-    font-family: 'Cinzel', serif;
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 1.4rem;
-}
-
-.title-tag {
-    display: block;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    opacity: 0.7;
-}
-
-.card p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin: 0;
-    text-align: left;
-}
-
-/* Effetti Hover e Colori dei Personaggi */
 .card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px #8b6fc9; /* Shadow di base se non sovrascritta */
 }
 
-.crimson h3 { color: #ff4d6d; }
-.crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
-
-/* Lythira: Grigio Acciaio/Nebbia */
-.grey h3 { color: #b0b7bd; }
-.grey:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
-
-/* Le Gemelle: Bianco Splendente */
-.white h3 { color: #ffffff; }
-.white:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); border-color: #ffffff; }
-
-.green h3 { color: #4dff9a; }
-.green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
-
-.purple h3 { color: #b07cff; }
-.purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
-
-.dark h3 { color: #888; }
-.dark:hover { box-shadow: 0 0 25px rgba(60, 60, 60, 0.5); border-color: #444; }
-
-.earth h3 { color: #d4a373; }
-.earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
-
-/* Liste e dettagli */
-.essence-list {
-    list-style-type: none;
-    padding-left: 0;
-}
-.essence-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-}
-.essence-list strong {
-    color: #bfaee3;
-}
-.center-text { text-align: center; margin-top: 30px; }
-
-/* Footer / Finale */
-.ending {
-    max-width: 850px;
-    margin: 150px auto 100px auto;
-    padding: 0 20px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
+/* --- Animazione Nebbia Originale --- */
+.fog {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .05), transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, .03), transparent 50%);
+    animation: fog 40s linear infinite;
+    pointer-events: none;
 }
 
-.ending h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    color: #f0e6d2;
+@keyframes fog {
+    from { transform: translateX(0); }
+    to { transform: translateX(-300px); }
 }
 
-.epic-text {
-    font-family: 'Cinzel', serif;
-    letter-spacing: 4px;
-    font-size: 1.3rem;
-    color: #9d4edd;
-    margin-bottom: 40px;
-}
-
-.final-paragraph {
-    font-style: italic;
-    opacity: 0.85;
-}
-
-.final-quote {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    margin-top: 40px;
-    color: #f0e6d2;
-}
-
-/* Animazione di Visualizzazione (Reveal Scroll) */
 .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 1.2s ease, transform 1.2s ease;
+    transition: 1s;
 }
 
 .reveal.active {
@@ -283,50 +87,116 @@ body {
     transform: translateY(0);
 }
 
-/* Stile per l'Emblema della Casata */
+/* --- Stelle Originali --- */
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: .5;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle {
+    0% { opacity: .1; }
+    50% { opacity: 1; }
+    100% { opacity: .2; }
+}
+
+
+/* ==========================================================================
+   AGGIORNAMENTI RICHIESTI (Colori Nomi e Ombre personalizzate al passaggio)
+   ========================================================================== */
+.card h3 {
+    margin-top: 0;
+    font-family: 'Cinzel', serif;
+}
+
+/* Thamorin */
+.crimson h3 { color: crimson; }
+.crimson:hover { box-shadow: 0 0 25px crimson; }
+
+/* Lythira (Grigio richiesto) */
+.grey h3 { color: #b0b7bd; }
+.grey:hover { box-shadow: 0 0 25px #b0b7bd; }
+
+/* Le Gemelle (Bianco richiesto) */
+.white h3 { color: #ffffff; }
+.white:hover { box-shadow: 0 0 25px #ffffff; }
+
+/* Vaerys */
+.green h3 { color: #4dff9a; }
+.green:hover { box-shadow: 0 0 25px #4dff9a; }
+
+/* Cyndra */
+.purple h3 { color: #b07cff; }
+.purple:hover { box-shadow: 0 0 25px #b07cff; }
+
+/* Coralyth */
+.dark h3 { color: #888888; }
+.dark:hover { box-shadow: 0 0 25px #444444; }
+
+/* Kaelen */
+.earth h3 { color: #d4a373; }
+.earth:hover { box-shadow: 0 0 25px #a67c52; }
+
+
+/* ==========================================================================
+   REGOLE DI SUPPORTO PER I NUOVI ELEMENTI DEL TUO HTML
+   ========================================================================== */
+.title-tag {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
 .hero-emblem {
-    max-width: 280px;
-    width: 100%;
+    max-width: 180px;
     height: auto;
-    margin-bottom: -10px;
-    filter: drop-shadow(0 0 20px rgba(139, 111, 201, 0.4));
-    animation: floatEmblem 6s ease-in-out infinite;
+    margin-bottom: 20px;
 }
 
-@keyframes floatEmblem {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+.story-container {
+    max-width: 900px;
+    margin: auto;
 }
 
-/* Pulsante Regolazione Audio Fantasy */
+.essence-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.essence-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.center-text {
+    text-align: center;
+    margin-top: 25px;
+    font-style: italic;
+}
+
 .audio-control {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: rgba(11, 15, 20, 0.85);
-    border: 1px solid rgba(139, 111, 201, 0.4);
-    padding: 10px 18px;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
     border-radius: 4px;
-    font-family: 'Cinzel', serif;
-    font-size: 0.85rem;
-    color: #e8e2d6;
     cursor: pointer;
     z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    letter-spacing: 1px;
-    backdrop-filter: blur(5px);
-    transition: all 0.4s ease;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    transition: 0.3s;
 }
 
 .audio-control:hover {
+    background: rgba(255, 255, 255, 0.1);
     border-color: #8b6fc9;
-    box-shadow: 0 0 15px rgba(139, 111, 201, 0.5);
-    background: rgba(15, 22, 33, 0.95);
-}
-
-.audio-control.playing {
-    border-color: #4dff9a;
-    box-shadow: 0 0 15px rgba(77, 255, 154, 0.2);
 }
