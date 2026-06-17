@@ -99,7 +99,7 @@ body {
 }
 
 /* ==========================================================================
-   Particelle / Stelle (Modificate per Fluttuazione e Trasparenza)
+   Particelle / Stelle (FIXATE: Ora visibili e fluttuanti)
    ========================================================================== */
 .star {
     position: fixed;
@@ -108,21 +108,21 @@ body {
     background: white;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 1;
-    animation: floatStars linear infinite;
+    z-index: 10; /* FIX: Portate sopra all'header così non vengono nascoste */
+    animation: floatStars 6s linear infinite; /* FIX: Aggiunta durata base obbligatoria per il CSS */
 }
 
 @keyframes floatStars {
     0% { 
         transform: translateY(0px) translateX(0px); 
-        opacity: 0.03; /* Molto trasparente alla nascita */
+        opacity: 0.1; /* Visibile ma soffusa alla nascita */
     }
     50% { 
-        opacity: 0.3;  /* Splendore massimo smorzato per rimanere soffuso */
+        opacity: 0.6; /* Splendore magico a metà percorso */
     }
     100% { 
-        transform: translateY(-80px) translateX(20px); 
-        opacity: 0.03; /* Svanisce salendo */
+        transform: translateY(-100px) translateX(25px); /* Fluttua verso l'alto e destra */
+        opacity: 0.1;
     }
 }
 
@@ -132,7 +132,7 @@ body {
 .hero {
     height: 100vh;
     display: flex;
-    flex-direction: column; /* Ordina l'emblema sopra al testo in verticale */
+    flex-direction: column; /* Allinea l'emblema verticalmente SOPRA al titolo */
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -142,7 +142,7 @@ body {
     box-sizing: border-box;
 }
 
-/* Nuovo: Configurazione ed Animazione dell'Emblema della Casata */
+/* Configurazione ed Animazione dell'Emblema della Casata */
 .hero-emblem {
     max-width: clamp(220px, 25vw, 310px);
     width: 100%;
@@ -154,12 +154,12 @@ body {
 
 @keyframes floatEmblem {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); } /* Fluttuazione morbida */
+    50% { transform: translateY(-12px); } /* Fluttuazione morbida verticale */
 }
 
 .hero h1 {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem); /* Dimensione fluida per evitare tagli orizzontali */
+    font-size: clamp(2.2rem, 5vw, 3.5rem); /* Evita che il testo si tagli sui lati */
     margin: 0;
     color: #f0e6d2;
     text-shadow: 0 0 30px rgba(139, 111, 201, 0.6);
@@ -175,6 +175,9 @@ body {
     letter-spacing: 3px;
 }
 
+/* ==========================================================================
+   Sezione Storia / Testi
+   ========================================================================== */
 .story-container {
     max-width: 850px;
     margin: auto;
@@ -255,20 +258,22 @@ body {
     text-align: left;
 }
 
-/* Hover degli Elementi e Colori Personalizzati */
 .card:hover {
     transform: translateY(-8px);
 }
 
+/* ==========================================================================
+   Colori Personalizzati Personaggi (Aggiornati)
+   ========================================================================== */
 /* Thamorin */
 .crimson h3 { color: #ff4d6d; }
 .crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
 
-/* Lythira: Grigio Argento Minerale */
+/* Lythira: Grigio Chiaro Minerale */
 .grey h3, .bluviola h3 { color: #b0b7bd; }
 .grey:hover, .bluviola:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
 
-/* Le Gemelle: Bianco Splendente */
+/* Le Gemelle: Bianco Puro */
 .white h3, .silver h3 { color: #ffffff; }
 .white:hover, .silver:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); border-color: #ffffff; }
 
@@ -302,7 +307,9 @@ body {
 }
 .center-text { text-align: center; margin-top: 30px; }
 
-/* Footer / Finale */
+/* ==========================================================================
+   Footer / Finale
+   ========================================================================== */
 .ending {
     max-width: 850px;
     margin: 150px auto 100px auto;
@@ -349,4 +356,35 @@ body {
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ==========================================================================
+   Nuovo: CSS Bottone "Ascolta l'Audio"
+   ========================================================================== */
+.audio-control {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(10, 15, 25, 0.85);
+    border: 1px solid rgba(139, 111, 201, 0.4);
+    color: #e8e2d6;
+    padding: 12px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 100; /* Rimane fisso sopra a tutti gli elementi della pagina */
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 15px rgba(139, 111, 201, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.audio-control:hover {
+    background: rgba(139, 111, 201, 0.15);
+    border-color: #8b6fc9;
+    box-shadow: 0 0 25px rgba(139, 111, 201, 0.45);
+    transform: translateY(-3px); /* Leggero sollevamento al passaggio del mouse */
+    color: #ffffff;
 }
