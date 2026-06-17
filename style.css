@@ -54,8 +54,13 @@ body {
 }
 
 @keyframes twinkle {
-    0% { opacity: 0.1; }
-    100% { opacity: 1; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9)); }
+    0% { 
+        opacity: 0.05; /* Le stelle al minimo sono quasi invisibili */
+    }
+    100% { 
+        opacity: 0.45; /* <--- ABBASSATO DA 1 A 0.45: ora sono molto più trasparenti e delicate */
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)); 
+    }
 }
 
 /* Layout e Contenuti (Hero & Main) */
