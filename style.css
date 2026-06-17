@@ -1,0 +1,255 @@
+/* Struttura Base e Reset */
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #080b11, #020305 85%);
+    color: #e8e2d6;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* Sfondi Ambientali Fisso e Nebbia cosmica */
+.fog {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(106, 13, 173, 0.05), transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(139, 111, 201, 0.03), transparent 50%);
+    animation: fogMovement 35s linear infinite alternate;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes fogMovement {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-30px, 30px); }
+}
+
+/* Cielo Stellato in Movimento (Particelle animate) */
+#particles {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: moveStar linear infinite, twinkle ease-in-out infinite alternate;
+}
+
+/* Movimento continuo e fluido verso l'alto e leggermente di lato */
+@keyframes moveStar {
+    0% {
+        transform: translateY(105vh) translateX(0);
+    }
+    100% {
+        transform: translateY(-5vh) translateX(45px);
+    }
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.1; }
+    100% { opacity: 1; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9)); }
+}
+
+/* Layout e Contenuti (Hero & Main) */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    margin: 0;
+    color: #f0e6d2;
+    text-shadow: 0 0 35px rgba(138, 43, 226, 0.5);
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-family: 'Cinzel', serif;
+    color: #a39c8e;
+    margin-top: 20px;
+    letter-spacing: 3px;
+}
+
+.story-container {
+    max-width: 850px;
+    margin: auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.chapter {
+    margin-bottom: 100px;
+    text-align: justify;
+}
+
+.chapter h2 {
+    font-family: 'Cinzel', serif;
+    color: #cfd6e6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 10px;
+    margin-top: 60px;
+    letter-spacing: 1px;
+}
+
+.lead {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #f0e6d2;
+    line-height: 1.7;
+}
+
+/* Profezia */
+.prophecy {
+    border-left: 3px solid #8a2be2;
+    padding-left: 25px;
+    margin: 40px 0;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #bfaee3;
+    line-height: 1.6;
+}
+
+/* Griglia dei Personaggi */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    padding: 25px;
+    background: rgba(8, 12, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+    transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+}
+
+.card h3 {
+    font-family: 'Cinzel', serif;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+}
+
+.title-tag {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+}
+
+/* Effetti Hover e Colori dei Personaggi */
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.crimson h3 { color: #ff4d6d; }
+.crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
+
+.bluviola h3 { color: #9d4edd; }
+.bluviola:hover { box-shadow: 0 0 25px rgba(138, 43, 226, 0.5); border-color: #8a2be2; }
+
+.silver h3 { color: #e0e0e0; }
+.silver:hover { box-shadow: 0 0 25px rgba(192, 192, 192, 0.3); border-color: silver; }
+
+.green h3 { color: #4dff9a; }
+.green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
+
+.purple h3 { color: #b07cff; }
+.purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
+
+.dark h3 { color: #888; }
+.dark:hover { box-shadow: 0 0 25px rgba(60, 60, 60, 0.5); border-color: #444; }
+
+.earth h3 { color: #d4a373; }
+.earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
+
+/* Liste e dettagli */
+.essence-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+.essence-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.essence-list strong {
+    color: #bfaee3;
+}
+.center-text { text-align: center; margin-top: 30px; }
+
+/* Footer / Finale */
+.ending {
+    max-width: 850px;
+    margin: 150px auto 100px auto;
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.ending h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    color: #f0e6d2;
+}
+
+.epic-text {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 4px;
+    font-size: 1.3rem;
+    color: #9d4edd;
+    margin-bottom: 40px;
+}
+
+.final-paragraph {
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.final-quote {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    color: #f0e6d2;
+}
+
+/* Animazione di Visualizzazione (Reveal Scroll) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
