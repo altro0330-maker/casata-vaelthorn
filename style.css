@@ -1,202 +1,352 @@
 /* ==========================================================================
-   IL TUO STILE ORIGINALE (Ripristinato dal file ZIP)
+   Struttura Base e Reset
    ========================================================================== */
 body {
     margin: 0;
-    background: radial-gradient(circle at top, #0b0f14, #050608 70%);
+    background: radial-gradient(circle at top, #0c0f17, #030406 80%);
     color: #e8e2d6;
     font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.8;
     overflow-x: hidden;
 }
 
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 4rem;
-    text-shadow: 0 0 20px #8b6fc9;
-}
-
-.subtitle { opacity: .8; }
-
-.chapter {
-    max-width: 900px;
-    margin: auto;
-    padding: 120px 20px;
-}
-
-h2 {
-    font-family: 'Cinzel';
-    color: #cfd6e6;
-}
-
-blockquote {
-    border-left: 3px solid #8b6fc9;
-    padding-left: 20px;
-    font-size: 1.4rem;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: .4s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 25px #8b6fc9; /* Shadow di base se non sovrascritta */
-}
-
-/* --- Animazione Nebbia Originale --- */
+/* Sfondi Ambientali Fisso e Nebbia */
 .fog {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .05), transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, .03), transparent 50%);
-    animation: fog 40s linear infinite;
+    background: radial-gradient(circle at 30% 30%, rgba(139, 111, 201, 0.04), transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.02), transparent 50%);
+    animation: fogMovement 40s linear infinite alternate;
     pointer-events: none;
+    z-index: 1;
 }
 
-@keyframes fog {
-    from { transform: translateX(0); }
-    to { transform: translateX(-300px); }
+@keyframes fogMovement {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(-50px, 20px); }
 }
 
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 1s;
+/* Struttura e Animazione dell'Albero di Vaelor */
+.tree-container {
+    position: fixed;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 900px;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    display: flex;
+    align-items: flex-end;
+    animation: treeSway 12s ease-in-out infinite alternate;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+.vaelor-tree {
+    width: 100%;
+    height: auto;
 }
 
-/* --- Stelle Originali --- */
+.tree-trunk, .tree-branch {
+    fill: none;
+    stroke: #1a233a;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.tree-branch {
+    stroke-width: 3;
+    opacity: 0.7;
+}
+
+/* Radici che si Illuminano (Effetto Neon/Glow) */
+.glowing-root {
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    animation: rootPulse 6s ease-in-out infinite alternate;
+}
+
+.root-1 { stroke: #8b6fc9; stroke-width: 4.5; animation-delay: 0s; }
+.root-2 { stroke: #a370f7; stroke-width: 3.5; animation-delay: 1.5s; }
+.root-3 { stroke: #513b82; stroke-width: 5; animation-delay: 3s; }
+.root-4 { stroke: #8b6fc9; stroke-width: 4; animation-delay: 0.7s; }
+.root-5 { stroke: #4d3380; stroke-width: 3; animation-delay: 2.2s; }
+
+@keyframes rootPulse {
+    0% {
+        stroke-width: inherit;
+        filter: drop-shadow(0 0 2px rgba(139, 111, 201, 0.3));
+        opacity: 0.4;
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(163, 112, 247, 0.9));
+        opacity: 1;
+    }
+    100% {
+        stroke-width: calc(inherit + 1px);
+        filter: drop-shadow(0 0 6px rgba(139, 111, 201, 0.5));
+        opacity: 0.6;
+    }
+}
+
+@keyframes treeSway {
+    0% { transform: translateX(-50%) rotate(-1deg); }
+    100% { transform: translateX(-50%) rotate(1deg); }
+}
+
+/* ==========================================================================
+   Particelle / Stelle (Modificate per Fluttuazione e Trasparenza)
+   ========================================================================== */
 .star {
     position: fixed;
     width: 2px;
     height: 2px;
     background: white;
     border-radius: 50%;
-    opacity: .5;
-    animation: twinkle linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    animation: floatStars linear infinite;
 }
 
-@keyframes twinkle {
-    0% { opacity: .1; }
-    50% { opacity: 1; }
-    100% { opacity: .2; }
+@keyframes floatStars {
+    0% { 
+        transform: translateY(0px) translateX(0px); 
+        opacity: 0.03; /* Molto trasparente alla nascita */
+    }
+    50% { 
+        opacity: 0.3;  /* Splendore massimo smorzato per rimanere soffuso */
+    }
+    100% { 
+        transform: translateY(-80px) translateX(20px); 
+        opacity: 0.03; /* Svanisce salendo */
+    }
 }
-
 
 /* ==========================================================================
-   AGGIORNAMENTI RICHIESTI (Colori Nomi e Ombre personalizzate al passaggio)
+   Layout, Contenuti e Ordinamento Emblema
    ========================================================================== */
-.card h3 {
-    margin-top: 0;
-    font-family: 'Cinzel', serif;
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Ordina l'emblema sopra al testo in verticale */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-/* Thamorin */
-.crimson h3 { color: crimson; }
-.crimson:hover { box-shadow: 0 0 25px crimson; }
-
-/* Lythira (Grigio richiesto) */
-.grey h3 { color: #b0b7bd; }
-.grey:hover { box-shadow: 0 0 25px #b0b7bd; }
-
-/* Le Gemelle (Bianco richiesto) */
-.white h3 { color: #ffffff; }
-.white:hover { box-shadow: 0 0 25px #ffffff; }
-
-/* Vaerys */
-.green h3 { color: #4dff9a; }
-.green:hover { box-shadow: 0 0 25px #4dff9a; }
-
-/* Cyndra */
-.purple h3 { color: #b07cff; }
-.purple:hover { box-shadow: 0 0 25px #b07cff; }
-
-/* Coralyth */
-.dark h3 { color: #888888; }
-.dark:hover { box-shadow: 0 0 25px #444444; }
-
-/* Kaelen */
-.earth h3 { color: #d4a373; }
-.earth:hover { box-shadow: 0 0 25px #a67c52; }
-
-
-/* ==========================================================================
-   REGOLE DI SUPPORTO PER I NUOVI ELEMENTI DEL TUO HTML
-   ========================================================================== */
-.title-tag {
-    display: block;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    opacity: 0.6;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
+/* Nuovo: Configurazione ed Animazione dell'Emblema della Casata */
 .hero-emblem {
-    max-width: 180px;
+    max-width: clamp(220px, 25vw, 310px);
+    width: 100%;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 25px rgba(139, 111, 201, 0.35));
+    animation: floatEmblem 6s ease-in-out infinite;
+}
+
+@keyframes floatEmblem {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); } /* Fluttuazione morbida */
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem); /* Dimensione fluida per evitare tagli orizzontali */
+    margin: 0;
+    color: #f0e6d2;
+    text-shadow: 0 0 30px rgba(139, 111, 201, 0.6);
+    letter-spacing: 2px;
+    line-height: 1.3;
+}
+
+.subtitle {
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+    font-family: 'Cinzel', serif;
+    color: #a39c8e;
+    margin-top: 20px;
+    letter-spacing: 3px;
 }
 
 .story-container {
-    max-width: 900px;
+    max-width: 850px;
     margin: auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
 }
 
+.chapter {
+    margin-bottom: 100px;
+    text-align: justify;
+}
+
+.chapter h2 {
+    font-family: 'Cinzel', serif;
+    color: #cfd6e6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin-top: 60px;
+    letter-spacing: 1px;
+}
+
+.lead {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #f0e6d2;
+    line-height: 1.7;
+}
+
+/* Profezia */
+.prophecy {
+    border-left: 3px solid #8b6fc9;
+    padding-left: 25px;
+    margin: 40px 0;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #bfaee3;
+    line-height: 1.6;
+}
+
+/* Griglia dei Personaggi */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card {
+    padding: 25px;
+    background: rgba(10, 15, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+}
+
+.card h3 {
+    font-family: 'Cinzel', serif;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+}
+
+.title-tag {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+}
+
+/* Hover degli Elementi e Colori Personalizzati */
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* Thamorin */
+.crimson h3 { color: #ff4d6d; }
+.crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
+
+/* Lythira: Grigio Argento Minerale */
+.grey h3, .bluviola h3 { color: #b0b7bd; }
+.grey:hover, .bluviola:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
+
+/* Le Gemelle: Bianco Splendente */
+.white h3, .silver h3 { color: #ffffff; }
+.white:hover, .silver:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); border-color: #ffffff; }
+
+/* Vaerys */
+.green h3 { color: #4dff9a; }
+.green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
+
+/* Cyndra */
+.purple h3 { color: #b07cff; }
+.purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
+
+/* Coralyth */
+.dark h3 { color: #777; }
+.dark:hover { box-shadow: 0 0 25px rgba(50, 50, 50, 0.6); border-color: #444; }
+
+/* Kaelen */
+.earth h3 { color: #d4a373; }
+.earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
+
+/* Liste di essenze e utilità text */
 .essence-list {
     list-style-type: none;
     padding-left: 0;
 }
-
 .essence-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
+.essence-list strong {
+    color: #bfaee3;
+}
+.center-text { text-align: center; margin-top: 30px; }
 
-.center-text {
+/* Footer / Finale */
+.ending {
+    max-width: 850px;
+    margin: 150px auto 100px auto;
+    padding: 0 20px;
     text-align: center;
-    margin-top: 25px;
-    font-style: italic;
+    position: relative;
+    z-index: 2;
 }
 
-.audio-control {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    z-index: 100;
+.ending h2 {
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    transition: 0.3s;
+    font-size: 2.2rem;
+    color: #f0e6d2;
 }
 
-.audio-control:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #8b6fc9;
+.epic-text {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 4px;
+    font-size: 1.3rem;
+    color: #8b6fc9;
+    margin-bottom: 40px;
+}
+
+.final-paragraph {
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.final-quote {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    color: #f0e6d2;
+    text-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* Animazione di Visualizzazione (Reveal Scroll) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
