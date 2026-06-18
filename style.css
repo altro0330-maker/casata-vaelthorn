@@ -61,7 +61,7 @@ body {
     opacity: 0.7;
 }
 
-/* Radici che si Illuminano (Effetto Neon/Glow) */
+/* Radici che si Illuminano */
 .glowing-root {
     fill: none;
     stroke-linecap: round;
@@ -106,7 +106,6 @@ body {
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999; 
-    
     animation-name: floatUp, twinkle;
     animation-iteration-count: infinite, infinite;
     animation-timing-function: linear, ease-in-out;
@@ -256,37 +255,29 @@ body {
 }
 
 /* ==========================================================================
-   Colori Personalizzati Personaggi (NUOVI COLORI RICHIESTI)
+   Colori Personalizzati Personaggi
    ========================================================================== */
-/* Thamorin */
 .crimson h3 { color: #ff4d6d; }
 .crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
 
-/* Le Gemelle: Avorio Splendente */
 .ivory h3, .white h3 { color: #fff9e6; }
 .ivory:hover, .white:hover { box-shadow: 0 0 25px rgba(255, 249, 230, 0.45); border-color: #fff9e6; }
 
-/* Lythira: Argento Splendente */
 .silver h3, .grey h3 { color: #e2e8f0; }
 .silver:hover, .grey:hover { box-shadow: 0 0 25px rgba(226, 232, 240, 0.5); border-color: #e2e8f0; }
 
-/* La Donna Corvo: Blu tendente al Viola Splendente */
 .bluviola h3, .dark h3 { color: #6366f1; }
 .bluviola:hover, .dark:hover { box-shadow: 0 0 25px rgba(99, 102, 241, 0.55); border-color: #6366f1; }
 
-/* Vaerys */
 .green h3 { color: #4dff9a; }
 .green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
 
-/* Cyndra */
 .purple h3 { color: #b07cff; }
 .purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
 
-/* Kaelen */
 .earth h3 { color: #d4a373; }
 .earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
 
-/* Liste e utility */
 .essence-list { list-style-type: none; padding-left: 0; }
 .essence-list li { padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
 .essence-list strong { color: #bfaee3; }
@@ -297,7 +288,7 @@ body {
    ========================================================================== */
 .ending {
     max-width: 850px;
-    margin: 150px auto 100px auto;
+    margin: 150px auto 50px auto;
     padding: 0 20px;
     text-align: center;
     position: relative;
@@ -320,7 +311,7 @@ body {
     transform: translateY(0);
 }
 
-/* Pulsante Audio unificato */
+/* Pulsante Audio Fisso */
 .audio-control, #audioToggle {
     position: fixed;
     bottom: 25px;
@@ -353,15 +344,54 @@ body {
     border-color: #4dff9a;
     box-shadow: 0 0 20px rgba(77, 255, 154, 0.3);
 }
-.logo-Astraria{
-    max-width: clamp(220px, 25vw, 310px);
-    width: 70%;
-    height: 70%;
-    margin-bottom: 25px;
-    filter: drop-shadow(0 0 25px rgba(139, 111, 201, 0.35));
-    animation: floatEmblem 6s ease-in-out infinite;
-}
-.Atraria{
-   align-items:center
+
+/* ==========================================================================
+   AGGIORNATO: Struttura Blocco Astraria (Logo & Bottone)
+   ========================================================================== */
+#Astraria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 40px auto 120px auto; /* Ampio spazio dal fondo pagina */
+    position: relative;
+    z-index: 2;
+    width: 100%;
 }
 
+#logo-Astraria {
+    max-width: clamp(160px, 18vw, 220px); /* Bilanciato e leggermente più piccolo dell'Hero */
+    width: 100%;
+    height: auto;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 25px rgba(139, 111, 201, 0.35));
+    animation: floatEmblem 6s ease-in-out infinite; /* Stesso identico galleggiamento magico */
+}
+
+/* Il nuovo bottone Instagram con lo stesso stile dell'Audio */
+.instagram-btn {
+    display: inline-block;
+    background: rgba(10, 15, 25, 0.85);
+    border: 1px solid rgba(139, 111, 201, 0.4);
+    color: #e8e2d6;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 15px rgba(139, 111, 201, 0.15);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; /* Rimuove la sottolineatura da link */
+}
+
+.instagram-btn:hover {
+    background: rgba(139, 111, 201, 0.15);
+    border-color: #8b6fc9;
+    box-shadow: 0 0 25px rgba(139, 111, 201, 0.45);
+    transform: translateY(-3px);
+    color: #ffffff;
+}
