@@ -15,13 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.addEventListener('scroll', show);
-    show(); // Esecuzione immediata al caricamento
+    show();
 
 
     /* ==========================================================================
-       2. GENERATORE DI STELLE (Cielo Stellato Dinamico)
+       2. GENERATORE DI STELLE (Velocizzate)
        ========================================================================== */
-    // Cerca il div #particles; se non esiste, le appende direttamente al body
     const particlesContainer = document.getElementById('particles') || document.body;
 
     if (particlesContainer) {
@@ -37,24 +36,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const s = document.createElement('div');
             s.className = 'star';
             
-            // FIX CRUCIALI: Distribuzione casuale totale (Sia asse X che asse Y)
             s.style.left = Math.random() * 100 + 'vw';
             s.style.top = Math.random() * 100 + 'vh'; 
             
-            // Calcolo durate differenziate (Vengono associate alle due animazioni CSS nell'ordine corretto)
-            const moveDuration = 20 + Math.random() * 40;   // Durata floatUp (20s - 60s)
-            const twinkleDuration = 2 + Math.random() * 4;  // Durata twinkle (2s - 6s)
-            s.style.animationDuration = `${moveDuration}s, ${twinkleDuration}s`;
+            // AGGIORNATO: Ridotti i tempi per raddoppiare la velocità di movimento e luccichio
+            const moveDuration = 5 + Math.random() * 12;    // Ora viaggiano veloci (tra i 5 e i 17 secondi, prima 20-60!)
+            const twinkleDuration = 1 + Math.random() * 3;  // Luccichio più reattivo (1-4 secondi)
             
-            // Delay negativi per distribuire le stelle subito nel flusso temporale
+            s.style.animationDuration = `${moveDuration}s, ${twinkleDuration}s`;
             s.style.animationDelay = `-${Math.random() * moveDuration}s, -${Math.random() * twinkleDuration}s`;
             
-            // Dimensioni assortite
             const size = Math.random() * 2.2 + 0.8;
             s.style.width = size + 'px';
             s.style.height = size + 'px';
             
-            // Colore casuale
             s.style.background = starColors[Math.floor(Math.random() * starColors.length)];
             
             particlesContainer.appendChild(s);
@@ -69,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById('bg-music');
 
     if (audioToggle && bgMusic) {
-        // Cerca l'elemento di testo interno; se non esiste usa il pulsante stesso
         const audioText = audioToggle.querySelector('.audio-text') || audioToggle;
 
         audioToggle.addEventListener('click', () => {
@@ -81,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Riproduzione bloccata dalle restrizioni del browser: ", err);
                 });
             } else {
-                bgMusic.paused();
+                bgMusic.pause();
                 audioToggle.classList.remove('playing');
                 audioText.innerText = 'Ascolta Melodia';
             }
