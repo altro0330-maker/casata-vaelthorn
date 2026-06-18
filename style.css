@@ -99,34 +99,33 @@ body {
 }
 
 /* ==========================================================================
-   Particelle / Stelle (Sincronizzate con il doppio timer JS)
+   Particelle / Stelle (Modificate: Più veloci e soffuse)
    ========================================================================== */
 .star {
     position: fixed;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9999; /* In primo piano assoluto */
+    z-index: 9999; 
     
-    /* Colleghiamo i due nomi di animazione che controlleremo via JS */
     animation-name: floatUp, twinkle;
     animation-iteration-count: infinite, infinite;
     animation-timing-function: linear, ease-in-out;
 }
 
-/* Animazione 1: Movimento continuo verso l'alto e destra */
+/* Movimento verticale */
 @keyframes floatUp {
     0% { 
         transform: translateY(0px) translateX(0px); 
     }
     100% { 
-        transform: translateY(-150px) translateX(35px); 
+        transform: translateY(-200px) translateX(45px); /* Spinta verso l'alto aumentata per il boost di velocità */
     }
 }
 
-/* Animazione 2: Dissolvenza e pulsazione luminosa isolata */
+/* AGGIORNATO: Trasparenza dimezzata per un look più misterioso ed elegante */
 @keyframes twinkle {
-    0%, 100% { opacity: 0.1; }
-    50% { opacity: 0.95; }
+    0%, 100% { opacity: 0.02; }
+    50% { opacity: 0.45; } /* Prima era 0.95, ora sono molto più delicate */
 }
 
 /* ==========================================================================
@@ -320,7 +319,7 @@ body {
 }
 
 /* ==========================================================================
-   Stile unificato Pulsante Audio (Supporta classi e ID)
+   Pulsante Audio unificato
    ========================================================================== */
 .audio-control, #audioToggle {
     position: fixed;
@@ -350,7 +349,6 @@ body {
     color: #ffffff;
 }
 
-/* Stato attivo quando la musica è in riproduzione */
 .audio-control.playing, #audioToggle.playing {
     border-color: #4dff9a;
     box-shadow: 0 0 20px rgba(77, 255, 154, 0.3);
