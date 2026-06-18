@@ -99,7 +99,7 @@ body {
 }
 
 /* ==========================================================================
-   Particelle / Stelle (Modificate: Più veloci e soffuse)
+   Particelle / Stelle (Veloci e Soffuse)
    ========================================================================== */
 .star {
     position: fixed;
@@ -112,20 +112,14 @@ body {
     animation-timing-function: linear, ease-in-out;
 }
 
-/* Movimento verticale */
 @keyframes floatUp {
-    0% { 
-        transform: translateY(0px) translateX(0px); 
-    }
-    100% { 
-        transform: translateY(-200px) translateX(45px); /* Spinta verso l'alto aumentata per il boost di velocità */
-    }
+    0% { transform: translateY(0px) translateX(0px); }
+    100% { transform: translateY(-200px) translateX(45px); }
 }
 
-/* AGGIORNATO: Trasparenza dimezzata per un look più misterioso ed elegante */
 @keyframes twinkle {
     0%, 100% { opacity: 0.02; }
-    50% { opacity: 0.45; } /* Prima era 0.95, ora sono molto più delicate */
+    50% { opacity: 0.45; } 
 }
 
 /* ==========================================================================
@@ -262,29 +256,37 @@ body {
 }
 
 /* ==========================================================================
-   Colori Personalizzati Personaggi
+   Colori Personalizzati Personaggi (NUOVI COLORI RICHIESTI)
    ========================================================================== */
+/* Thamorin */
 .crimson h3 { color: #ff4d6d; }
 .crimson:hover { box-shadow: 0 0 25px rgba(220, 20, 60, 0.4); border-color: crimson; }
 
-.grey h3, .bluviola h3 { color: #b0b7bd; }
-.grey:hover, .bluviola:hover { box-shadow: 0 0 25px rgba(176, 183, 189, 0.4); border-color: #b0b7bd; }
+/* Le Gemelle: Avorio Splendente */
+.ivory h3, .white h3 { color: #fff9e6; }
+.ivory:hover, .white:hover { box-shadow: 0 0 25px rgba(255, 249, 230, 0.45); border-color: #fff9e6; }
 
-.white h3, .silver h3 { color: #ffffff; }
-.white:hover, .silver:hover { box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); border-color: #ffffff; }
+/* Lythira: Argento Splendente */
+.silver h3, .grey h3 { color: #e2e8f0; }
+.silver:hover, .grey:hover { box-shadow: 0 0 25px rgba(226, 232, 240, 0.5); border-color: #e2e8f0; }
 
+/* La Donna Corvo: Blu tendente al Viola Splendente */
+.bluviola h3, .dark h3 { color: #6366f1; }
+.bluviola:hover, .dark:hover { box-shadow: 0 0 25px rgba(99, 102, 241, 0.55); border-color: #6366f1; }
+
+/* Vaerys */
 .green h3 { color: #4dff9a; }
 .green:hover { box-shadow: 0 0 25px rgba(77, 255, 154, 0.4); border-color: #4dff9a; }
 
+/* Cyndra */
 .purple h3 { color: #b07cff; }
 .purple:hover { box-shadow: 0 0 25px rgba(176, 124, 255, 0.4); border-color: #b07cff; }
 
-.dark h3 { color: #777; }
-.dark:hover { box-shadow: 0 0 25px rgba(50, 50, 50, 0.6); border-color: #444; }
-
+/* Kaelen */
 .earth h3 { color: #d4a373; }
 .earth:hover { box-shadow: 0 0 25px rgba(166, 124, 82, 0.4); border-color: #a67c52; }
 
+/* Liste e utility */
 .essence-list { list-style-type: none; padding-left: 0; }
 .essence-list li { padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
 .essence-list strong { color: #bfaee3; }
@@ -318,9 +320,7 @@ body {
     transform: translateY(0);
 }
 
-/* ==========================================================================
-   Pulsante Audio unificato
-   ========================================================================== */
+/* Pulsante Audio unificato */
 .audio-control, #audioToggle {
     position: fixed;
     bottom: 25px;
